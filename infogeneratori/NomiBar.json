@@ -1,0 +1,8 @@
+{
+    "nome": "Generatore Nomi Bar",
+    "descrizione": "Trova il nome del tuo locale tutto italiano",
+    "endpoint": "NomiBar",
+    "multiline": false,
+    "posizione": 4,
+    "versione": "1.3"
+}

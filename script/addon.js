@@ -3,15 +3,5 @@
 
 // Attende che la app sia completamente caricata
 inizializzazioneApp.then(() => {
-    $(".bottone").click(function () {
-        $(this).blur();
-        var val = $(this).val();
-        var tipo = $(this).data("type");
 
-        if (tipo && tipo != "") {
-            swal.fire(tipo, val, tipo);
-        } else {
-            swal.fire(val);
-        }
-    });
 });

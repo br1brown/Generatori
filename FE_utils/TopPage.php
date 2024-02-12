@@ -11,9 +11,6 @@ foreach ($settings as $key => $value) {
 	${$key} = $value;
 }
 
-try {
-$irl = $service->callApiEndpoint("/anagrafica");
-} catch (Exception $e) {}
 ?>
 <!doctype html>
 <html lang="<?= $service->currentLang() ?>">

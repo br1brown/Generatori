@@ -1,67 +1,115 @@
 <?php 
-$title = "Home";
-// $singledescription = "Pagina principale";
 include('FE_utils/TopPage.php');
+
+$footer = $multiplo;
+if ($multiplo):
 ?>
-		<div class="row">
-			<div class="col-12 text-center <?=$isDarkTextPreferred? "text-dark":"text-light" ?>">
-				<h1><b><?=$title?></b></h1>
-				<?php if(isset($meta['author'])) : ?>
-					<i>By <?= $meta['author']?></i>
+	<div class="row">
+		<div class="col-12 text-center <?=$isDarkTextPreferred? "text-dark":"text-light" ?>">
+			<h2><b>Generatori</b></h2>
+		</div>
+	</div>
+<?php 
+endif;
+
+?>
+<style>
+</style>
+    <div class="row">
+<?php
+foreach ($generatori as $gen): ?>
+        <div class="col-12 offset-md-2 col-md-8 p-4<?= ($multiplo)? " mt-1 rounded tutto": ""?>">
+            <div class=row>
+				<?php 
+				if ($multiplo):?>
+				<h3><a href="<?= htmlspecialchars($gen['url']); ?>" title="<?= htmlspecialchars($gen['nome']); ?>"><?= htmlspecialchars($gen['nome']); ?></a></h2>
+				<?php else: ?>
+				<h3><?= htmlspecialchars($gen['nome']); ?> </h2>
 				<?php endif; ?>
+				<hr><code class="p-1">Vers. <?= htmlspecialchars($gen['versione']); ?></code>
+			</div>
+			<div class="row">
+				<p class="col-md col-12"><?= htmlspecialchars($gen['descrizione']); ?></p>
+				<div class="col-auto">
+					<button class="btn btn-primary generate-btn" 
+						data-endpoint="<?= htmlspecialchars($gen['endpoint']); ?>" 
+						data-key="<?= htmlspecialchars($gen['selfchiaveGET']); ?>">
+						Genera
+					</button>	
+				</div>
+			</div>
+            <div class="row">
+				<div class="col<?= $gen['multiline'] ? '': '-auto' ; ?> bordo bg-light" style="display: none;" id="output-<?= htmlspecialchars($gen['selfchiaveGET']); ?>"></div>
+			</div>
+            <div class="row">
+				<div class="col"></div>
+				<div class="col-auto">
+					<button class="btn btn-light btn-sm copy-btn"  
+							data-key="<?= htmlspecialchars($gen['selfchiaveGET']); ?>"
+							data-nome="<?= htmlspecialchars($gen['nome']); ?>"
+							data-url="<?= htmlspecialchars($gen['url']); ?>"
+							id="copy-btn-<?= htmlspecialchars($gen['selfchiaveGET']); ?>"
+							style="display: none;">
+						<i class="social-icon fa fa-clone"></i> Copia
+					</button>	
+				</div>
+
 			</div>
 		</div>
-		<div class="row">
-		    <div class="offset-1 col-10 offset-md-2 col-md-8 shadow rounded tutto text-center">
-				<div class="row">
-					<p class=col><?= $irl['infoBase']?></p>
-				</div>
-		        <div class="row">
-		            <div class="p-3 col-xs-4 col-sm-4 col-md-4">
-		                <div class="polaroid ruotadestra">
-		                    <img id=img_generica src="https://via.placeholder.com/550x360/D3D3D3" alt="Foto Generica">
-		                    <p class="caption">...</p>
-		                </div>
-		            </div>
-		            <div class="col-xs-8 col-sm-8 col-md-8">
-		                <!-- https://getbootstrap.com/docs/4.0/components/buttons/ -->
-		                <input type="button" class="bottone btn btn-primary btn-lg" value="<?= $service->traduci("conferma");?>"><br>
-		                <input type="button" data-type="success" id=success class="zoomma bottone btn btn-success btn-lg" value="<?= $service->traduci("successo");?>">
-		                <input type="button" data-type="error" id=danger class="zoomma bottone btn btn-danger btn-lg" value="<?= $service->traduci("errore");?>"><br>
-		                <input type="button" data-type="warning" id=warning class="zoomma bottone btn btn-warning btn-sm" value="<?= $service->traduci("attenzione");?>">
-		                <input type="button" data-type="info" id=info class="zoomma bottone btn btn-info btn-sm" value="<?= $service->traduci("info");?>">
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="text-center col-xs-12 col-sm-12 col-md-12">
-		                <input type="button" id=primary class="bottone btn btn-outline-primary btn-sm" value="SUBMIT">
-		                <input type="button" id=secondary class="bottone btn btn-outline-secondary btn-sm" value="SECONDARY">
-		                <input type="button" id=dark class="bottone btn btn-outline-dark btn-sm" value="DARK">
-		                <input type="button" id=light class="bottone btn btn-outline-light btn-sm" value="LIGHT">
-		                <input type="button" id=link class="bottone btn btn-outline-link btn-sm" value="LINK">
-		            </div>
-		        </div>
-		    </div>
-		</div>
+
+<?php endforeach; ?>
+    </div>
+
+
 
 <?php include('FE_utils/BottomPage.php'); ?>
 
 <script>
-	inizializzazioneApp.then(() => {
-		var testo = traduci('imgDinamica');
-		var imageCreata = new CreaImmagine(testo,
-								'<?= $colorTema ?>',
-								'<?= $isDarkTextPreferred?"black": "white" ?>'
-								)
-					.costruisci();
+let generatori = {};
 
-		$('#img_generica').attr('src', imageCreata.urlImmagine());
+$(document).ready(function() {
+    // Gestione del click sul pulsante "Genera"
+    $('.generate-btn').click(function() {
+		var btn = $(this); // Referenzia il bottone
+		btn.blur();
+        var endpoint = btn.data('endpoint');
+        var key = btn.data('key');
+        var outputId = '#output-' + key;
+        var copyBtnId = '#copy-btn-' + key;
 
-		apiCall("social",{ nomi : "Facebook;twitter;Telegram"},
-		function (response){
-			debugger;
-		});
-	});
+        // Chiamata all'API
+        apiCall(endpoint, {markdown : true}, function(response) {
+			generatori[key] = (response.text);
+			$.get("FE_utils/markparsing" + MakeGetQueryString({text: response.markdown}), function(data, status){
+				$(outputId).html(data);
+				$(outputId).show(); // Mostra il contenuto
+				disattivaper(btn,3000);
+			});
+
+			$(copyBtnId).show(); // Mostra il pulsante "Copia"
+			disattivaper(btn,3000);
+        });
+    });
+
+    // Gestione del click sul pulsante "Copia"
+    $('.copy-btn').click(function() {
+		$(this).blur();
+
+        var key = $(this).data('key');
+        var targetId = $(this).data('target');
+        var urlGeneratore = $(this).data('url');
+
+        // Crea il testo da copiare
+        var textToCopy = generatori[key] + "\n\nDal " + $(this).data('nome') + ": " + urlGeneratore;
+
+		copyToClipboard(textToCopy)
+			.then(() => swal.fire("Copiato","","success"))
+			.catch(() => console.log('errore nella copia'));
+
+
+    });
+});
+
 </script>
 
 </html>

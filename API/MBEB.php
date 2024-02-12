@@ -1,0 +1,32 @@
+<?php
+include __DIR__.'/BLL/auth_and_cors_middleware.php';
+function eseguiGET(){
+
+echo Echo_getObj("mbeb", function ($data) {
+    $frasi = selezionaCore(
+                            $data,
+                            rand(3,4),
+                            ['[donne]','vanta','definisce','fetic'],
+                            [
+                                ranges_eta(true),
+                                ['[professioni]','[profdigitali]']
+                            ]
+                    );
+
+    $result= randomName('m',rand(0,1) == 0). "\n";
+    $result .= implodeRandomSeparator([". ", "; ",".\n"],$frasi);
+    $lastSeparatorIndex = -1;
+
+    foreach (['generici', 'comportamenti','percezione'] as $value) {
+        selezionaCasualeSenzaDoppioni($data['aggettivi'][$value], $value, $result);
+    }
+
+    $result = replaceStandard($data,$result);
+    $result = MaiuscoleDopoPunteggiatura($result.".");
+
+    return getResult($result,"#".FormatMarkdownString($result));
+});
+}
+include __DIR__.'/BLL/gestione_metodi.php';
+
+?>

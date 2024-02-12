@@ -1,0 +1,8 @@
+{
+    "nome": "Generatore MBEB",
+    "descrizione": "Genera il tuo Maschio Bianco Etero Basico",
+    "endpoint": "MBEB",
+    "multiline": true,
+    "versione": "2",
+    "posizione": 1
+}

@@ -1,8 +1,14 @@
 <?php
 require_once __DIR__.'/funzioni.php';
-dynamicMenu($service, $settings['itemsMenu']);
 
-$meta['title'] = isset($title) ? $service->traduci($title) : $settings['AppName'];
-$meta['description'] = isset($singledescription) ? $service->traduci($singledescription) : $settings['description'];
+// Array per memorizzare i dati dei generatori.
+$generatori = caricaGeneratori($service); 
+$multiplo = (count($generatori) > 1);
+
+$meta['title'] = $multiplo? $settings['AppName']: $generatori[0]['nome'];
+$meta['description'] = $multiplo? $settings['description']: $generatori[0]['descrizione'];
+
+if (!$multiplo)
+    dynamicMenu(caricaGeneratori($service, true), $settings['itemsMenu']);
 
 ?>

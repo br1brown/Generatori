@@ -1,0 +1,8 @@
+{
+    "nome": "Generatore Invettive Automobilistiche",
+    "descrizione": "Non sai cosa dire quando un guidatore fa delle manovre poco piacevoli? Ecco il generatore che fa per te!",
+    "endpoint": "RageGuidatore",
+    "multiline": true,
+    "posizione": 3,
+    "versione": "1"
+}

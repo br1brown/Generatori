@@ -9,8 +9,6 @@
 			<p>© 2024 <?= $AppName?></p>
 			<p class="text-muted"><?= $description?></p>
 		</div>
-		</div>
-	</div>
 	</footer>
 <?php endif; ?>
 

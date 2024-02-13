@@ -11,4 +11,3 @@ $meta['description'] = $multiplo? $settings['description']: $generatori[0]['desc
 if (!$multiplo)
     dynamicMenu(caricaGeneratori($service, true), $settings['itemsMenu']);
 
-?>

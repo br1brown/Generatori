@@ -44,6 +44,10 @@ foreach ($settings as $key => $value) {
 
 	<!-- Indica la frequenza con cui la pagina dovrebbe essere aggiornata -->
 	<meta http-equiv="refresh" content="<?= $meta['refreshIntervalInSeconds'] ?>">
+	<?php if (isset($meta['dataScadenza'])): ?>
+		<!-- La data di scadenza dei contenuti nel meta tag -->
+		<meta http-equiv="expires" content="<?= $meta["dataScadenzaGMT"]; ?>">
+	<?php endif; ?>
 
 	<!-- Colore tematico per il browser sui dispositivi Android -->
 	<meta name="theme-color" content="<?= $colorTema ?>" />

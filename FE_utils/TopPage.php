@@ -65,6 +65,7 @@ foreach ($settings as $key => $value) {
 
 
 	<script>
+		const clsTxt = '<?= $clsTxt ?>';
 		const APIEndPoint = '<?= $service->urlAPI ?>';
 		const APIKey = '<?= $service->APIkey ?>';
 		const lang = '<?= $service->currentLang() ?>';

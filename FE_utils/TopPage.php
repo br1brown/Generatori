@@ -167,7 +167,3 @@ foreach ($settings as $key => $value) {
 
 		</nav>
 	<?php endif; ?>
-
-	<div class="container-fluid">
-
-		<!-- qui comincia l'html diverso per tutti -->

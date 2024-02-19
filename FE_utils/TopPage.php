@@ -65,11 +65,18 @@ foreach ($settings as $key => $value) {
 
 
 	<script>
-		const clsTxt = '<?= $clsTxt ?>';
-		const APIEndPoint = '<?= $service->urlAPI ?>';
-		const APIKey = '<?= $service->APIkey ?>';
-		const lang = '<?= $service->currentLang() ?>';
-		let _pathtraduzione = '<?= $service->pathLang ?>';
+		infoContesto = {
+			clsTxt: '<?= $clsTxt ?>',
+			EsternaAPI: <?= $service->EsternaAPI ? "true" : "false" ?>,
+			APIKey: '<?= $service->APIkey ?>',
+			lang: '<?= $service->currentLang() ?>',
+			route: {
+				traduzione: '<?= $service->pathLang ?>',
+				APIEndPoint: '<?= $service->urlAPI ?>',
+				gateway: '<?= $service->baseURL('func/gateway') ?>',
+				markparsing: '<?= $service->baseURL('func/markparsing') ?>'
+			}
+		}
 	</script>
 
 	<?php
@@ -98,9 +105,7 @@ foreach ($settings as $key => $value) {
 	<style>
 		:root {
 			<?php foreach ($colori as $chiave => $colore): ?>
-				--<?= $chiave; ?>:
-					<?= $colore; ?>
-				;
+				<?= "--{$chiave}: {$colore};\n"; ?>
 			<?php endforeach; ?>
 		}
 	</style>
@@ -108,7 +113,8 @@ foreach ($settings as $key => $value) {
 </head>
 
 <body>
-	<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button">
+	<a id="back-to-top" href="#" class="btn btn-<?= $isDarkTextPreferred ? "light" : "dark"; ?> btn-lg back-to-top"
+		role="button">
 		<i class="fas fa-chevron-up"></i>
 	</a>
 	<?php
@@ -164,6 +170,5 @@ foreach ($settings as $key => $value) {
 						</div>
 					</div>
 				<?php endif; ?>
-
 		</nav>
 	<?php endif; ?>

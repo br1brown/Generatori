@@ -92,7 +92,7 @@ include('FE_utils/TopPage.php');
 			// Chiamata all'API
 			apiCall(endpoint, { markdown: true }, function (response) {
 				generatori[key] = (response.text);
-				$.get("FE_utils/markparsing" + MakeGetQueryString({ text: response.markdown }), function (data, status) {
+				$.get(infoContesto.route.markparsing + MakeGetQueryString({ text: response.markdown }), function (data, status) {
 					$(outputId).html(data);
 					$(outputId).show(); // Mostra il contenuto
 					disattivaper(btn, 3000);

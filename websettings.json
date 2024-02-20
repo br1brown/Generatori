@@ -9,7 +9,6 @@
         "EndPoint": "API",
         "key": "frontend"
     },
-    "favIcon": "asset/favicon.png",
     "colorTema": "#b3ffb7",
     "footer": true
 }

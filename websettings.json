@@ -3,10 +3,6 @@
     "lang": "IT",
     "description": "Sito dove i vari Generatori di Br1Brown sono immagazzinati",
     "meta": {
-        "MobileFriendly": true,
-        "iOSFullScreenWebApp": true,
-        "mobileOptimizationWidth": 320,
-        "refreshIntervalInSeconds": 900,
         "keywords": []
     },
     "API": {

@@ -61,7 +61,7 @@ foreach ($settings as $key => $value) {
 	<!-- Permette al sito web di funzionare a schermo intero su Safari iOS, simile a un'applicazione nativa -->
 	<meta name="apple-mobile-web-app-capable" content="<?= $meta->iOSFullScreenWebApp ? "yes" : "no" ?>">
 
-	<link rel="icon" type="image/png" href="<?= $service->RenderIMG("favIcon") ?>">
+	<link rel="icon" type="image/png" href="<?= $service->UrlAsset("favIcon") ?>">
 
 
 	<script>

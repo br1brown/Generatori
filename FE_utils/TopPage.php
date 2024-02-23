@@ -10,6 +10,7 @@ require_once __DIR__ . '/headeraddon.php';
 foreach ($settings as $key => $value) {
 	${$key} = $value;
 }
+$routeAttuale = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME);
 
 ?>
 <!doctype html>
@@ -20,7 +21,7 @@ foreach ($settings as $key => $value) {
 	$clsTxt = $isDarkTextPreferred ? "text-dark" : "text-light";
 	?>
 	<title>
-		<?= $meta->title; ?>
+		<?= $meta->title . " | " . $AppName; ?>
 	</title>
 
 	<meta charset="UTF-8">
@@ -73,8 +74,8 @@ foreach ($settings as $key => $value) {
 			route: {
 				traduzione: '<?= $service->pathLang ?>',
 				APIEndPoint: '<?= $service->urlAPI ?>',
-				<?php foreach ($routes as $url):
-					$v = basename($url, ".php");
+				<?php foreach ($routes as $singleRouting):
+					$v = basename($singleRouting, ".php");
 					echo "\n\t\t\t\t{$v}: '" . $service->baseURL('func/' . $v) . "',\n";
 				endforeach; ?>
 			}
@@ -138,8 +139,7 @@ foreach ($settings as $key => $value) {
 				<ul class="navbar-nav">
 					<?php
 					foreach ($itemsMenu as $key => $value): ?>
-						<li
-							class="nav-item<?= pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME) == $value['route'] ? " active" : "" ?>">
+						<li class="nav-item<?= $routeAttuale == $value['route'] ? " active" : "" ?>">
 							<a class="nav-link" href="<?= $service->createRoute($value['route']) ?>">
 								<?= $service->traduci(ucfirst($value['nome'])); ?></span>
 							</a>

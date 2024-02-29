@@ -1,7 +1,9 @@
 {
     "AppName": "Generatori",
-    "lang": "IT",
-    "description": "Sito dove i vari Generatori di Br1Brown sono immagazzinati",
+    "lang": "it",
+    "description": {
+        "it": "Sito dove i vari Generatori di Br1Brown sono immagazzinati"
+    },
     "meta": {
         "keywords": []
     },

@@ -10,7 +10,6 @@ require_once __DIR__ . '/headeraddon.php';
 foreach ($settings as $key => $value) {
 	${$key} = $value;
 }
-$routeAttuale = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME);
 
 ?>
 <!doctype html>
@@ -21,7 +20,7 @@ $routeAttuale = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME);
 	$clsTxt = $isDarkTextPreferred ? "text-dark" : "text-light";
 	?>
 	<title>
-		<?= $meta->title . " | " . $AppName; ?>
+		<?= ($meta->title == "" ? "" : $meta->title . " | ") . $AppName; ?>
 	</title>
 
 	<meta charset="UTF-8">
@@ -128,9 +127,7 @@ $routeAttuale = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME);
 	//se $forceMenu è valorizzata a true lo metti, se non c'è lo metti
 	if (isset($itemsMenu) && count($itemsMenu) > 0 && ((isset($forceMenu)) ? ($forceMenu == true) : true)): ?>
 		<nav class="navbar navbar-expand-sm <?= $isDarkTextPreferred ? "navbar-light" : "navbar-dark" ?> fillColoreSfondo">
-			<a class="navbar-brand" href="<?= $service->createRoute("index") ?>">
-				<?= $AppName ?>
-			</a>
+			<?= $service->CreateRouteLinkHTML($AppName, "index", "navbar-brand", false) ?>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -139,10 +136,9 @@ $routeAttuale = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME);
 				<ul class="navbar-nav">
 					<?php
 					foreach ($itemsMenu as $key => $value): ?>
-						<li class="nav-item<?= $routeAttuale == $value['route'] ? " active" : "" ?>">
-							<a class="nav-link" href="<?= $service->createRoute($value['route']) ?>">
-								<?= $service->traduci(ucfirst($value['nome'])); ?></span>
-							</a>
+						<li
+							class="nav-item<?= pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME) == $value['route'] ? " active" : "" ?>">
+							<?= $service->CreateRouteLinkHTML($value['nome'], $value['route'], "nav-link", false) ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>

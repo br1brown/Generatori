@@ -14,6 +14,14 @@ include('FE_utils/TopPage.php');
 			</div>
 		</div>
 		<?php
+	else: ?>
+
+		<div class="row">
+			<div class="col-12 text-center <?= $isDarkTextPreferred ? "text-dark" : "text-light" ?>">
+				<h6><i><a href="<?= $service->createRoute("index") ?>">Mostra tutti i Generatori</a></i></h6>
+			</div>
+		</div>
+		<?php
 	endif;
 
 	?>

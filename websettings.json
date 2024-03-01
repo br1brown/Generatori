@@ -5,12 +5,18 @@
         "it": "Sito dove i vari Generatori di Br1Brown sono immagazzinati"
     },
     "meta": {
-        "keywords": []
+        "keywords": [
+            "generatore",
+            "ridere"
+        ]
     },
     "API": {
         "EndPoint": "API",
         "key": "frontend"
     },
     "colorTema": "#b3ffb7",
-    "footer": true
+    "footer": true,
+    "url": {
+        "GitHub": "https://github.com/br1brown/Generatori"
+    }
 }

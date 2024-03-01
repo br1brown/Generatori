@@ -61,7 +61,6 @@ include('FE_utils/TopPage.php');
 						id="output-<?= htmlspecialchars($gen['selfchiaveGET']); ?>"></div>
 				</div>
 				<div class="row">
-					<div class="col"></div>
 					<div class="col-auto">
 						<button class="btn btn-light btn-sm copy-btn"
 							data-key="<?= htmlspecialchars($gen['selfchiaveGET']); ?>"
@@ -71,6 +70,16 @@ include('FE_utils/TopPage.php');
 							<i class="social-icon fa fa-clone"></i> Copia
 						</button>
 					</div>
+
+					<div class="col-auto">
+						<button class="btn btn-light btn-sm share-btn"
+							data-key="<?= htmlspecialchars($gen['selfchiaveGET']); ?>"
+							data-nome="<?= htmlspecialchars($gen['nome']); ?>"
+							id="share-btn-<?= htmlspecialchars($gen['selfchiaveGET']); ?>" style="display: none;">
+							<i class="social-icon fa fa-share"></i> Condividi
+						</button>
+					</div>
+					<div class="col"></div>
 
 				</div>
 			</div>
@@ -96,6 +105,7 @@ include('FE_utils/TopPage.php');
 			var key = btn.data('key');
 			var outputId = '#output-' + key;
 			var copyBtnId = '#copy-btn-' + key;
+			var shareBtnId = '#share-btn-' + key;
 
 			// Chiamata all'API
 			apiCall(endpoint, { markdown: true }, function (response) {
@@ -107,6 +117,7 @@ include('FE_utils/TopPage.php');
 				});
 
 				$(copyBtnId).show(); // Mostra il pulsante "Copia"
+				$(shareBtnId).show(); // Mostra il pulsante "Condividi"
 				disattivaper(btn, 3000);
 			});
 		});
@@ -116,7 +127,6 @@ include('FE_utils/TopPage.php');
 			$(this).blur();
 
 			var key = $(this).data('key');
-			var targetId = $(this).data('target');
 			var urlGeneratore = $(this).data('url');
 
 			// Crea il testo da copiare
@@ -126,7 +136,20 @@ include('FE_utils/TopPage.php');
 				.then(() => swal.fire("Copiato", "", "success"))
 				.catch(() => console.log('errore nella copia'));
 
+		});
 
+
+		// Gestione del click sul pulsante "Condividi"
+		$('.share-btn').click(function () {
+			$(this).blur();
+
+			var key = $(this).data('key');
+
+			var imageCreata = new CreaImmagine(generatori[key] + "\n\nDal " + $(this).data('nome'),
+				'<?= $colori["colorTema"] ?>',
+				'<?= $isDarkTextPreferred ? "black" : "white" ?>'
+			).costruisci();
+			imageCreata.condividiImmagine("Frase del " + $(this).data('nome'));
 		});
 	});
 

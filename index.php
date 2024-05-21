@@ -86,6 +86,7 @@ include('FE_utils/TopPage.php');
 
 		<?php endforeach; ?>
 	</div>
+	</div>
 
 
 

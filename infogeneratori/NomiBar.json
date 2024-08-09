@@ -3,6 +3,6 @@
     "descrizione": "Trova il nome del tuo locale tutto italiano",
     "endpoint": "NomiBar",
     "multiline": false,
-    "posizione": 4,
+    "posizione": 10,
     "versione": "1.3"
 }

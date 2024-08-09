@@ -76,9 +76,9 @@ function selezionaCasualeSenzaDoppioni($array, $chiave, &$result) {
 function ranges_eta($returnonlykey = false) {
     $range = [
         "[ia]" => "[0-6]",   // infant age
-        "[ba]" => "[6-12]",  // baby age
-        "[ta]" => "[12-16]", // teen age
-        "[sa]" => "[16-27]", // small age
+        "[ba]" => "[6-13]",  // baby age
+        "[ta]" => "[13-19]", // teen age
+        "[sa]" => "[19-27]", // small age
         "[ma]" => "[27-60]", // middle age
         "[oa]" => "[50-76]"  // old age
     ];

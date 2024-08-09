@@ -3,6 +3,6 @@
     "descrizione": "Non sai cosa dire quando un guidatore fa delle manovre poco piacevoli? Ecco il generatore che fa per te!",
     "endpoint": "RageGuidatore",
     "multiline": true,
-    "posizione": 3,
+    "posizione": 5,
     "versione": "1"
 }

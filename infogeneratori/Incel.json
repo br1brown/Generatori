@@ -1,0 +1,8 @@
+{
+    "nome": "Generatore Incel",
+    "descrizione": "Genera il tuo incel di fiducia",
+    "endpoint": "Incel",
+    "multiline": true,
+    "posizione": 2,
+    "versione": "0.2"
+}

@@ -66,6 +66,14 @@ foreach ($settings as $key => $value) {
 	<meta name="accessibility-features" content="visual, auditory, cognitive, mobility">
 
 	<script>
+
+		function getBearerToken() {
+			<?php if ($isLoggedIn && isset($_SESSION['BearerToken'])):
+				echo 'return "' . $_SESSION['BearerToken'] . '";';
+			endif; ?>
+			return null;
+		}
+
 		infoContesto = {
 			clsTxt: '<?= $clsTxt ?>',
 			EsternaAPI: <?= $service->EsternaAPI ? "true" : "false" ?>,

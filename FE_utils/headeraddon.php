@@ -11,3 +11,8 @@ $meta->description = $multiplo? $settings['description']: $generatori[0]['descri
 if (!$multiplo)
     dynamicMenu(caricaGeneratori($service, true), $settings['itemsMenu']);
 
+
+session_start();
+
+// Controlla se l'utente è loggato
+$isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
